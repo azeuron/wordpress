@@ -1,6 +1,6 @@
-#Self-hosted WordPress project
+# Self-hosted WordPress project
 
-#1️⃣ Directory Structure
+# 1️⃣ Directory Structure
 
    ```css
    homelab-wordpress/
