@@ -8,22 +8,23 @@ This repo deploys a WordPress VM in Proxmox using Terraform and configures it wi
    ```bash
    cp terraform/terraform.tfvars.example terraform/terraform.tfvars
    cp ansible/inventory.ini.example ansible/inventory.ini
-```
+   ```
 
 2. Edit the files to set your Proxmox host, credentials, and IPs.
+
 
 3. Initialize Terraform:
    ```bash
    cd terraform
    terraform init
    terraform apply
-```
+   ```
 
 4. Configure with Ansible:
    ```bash
    cd ../ansible
    ansible-playbook -i inventory.ini playbook.yml
-```
+   ```
 
 
 ---
@@ -77,7 +78,7 @@ main.tf
 
   sshkeys = file("~/.ssh/id_rsa.pub")
 }
-```
+   ```
 
 ---
 
@@ -94,7 +95,7 @@ variable "ip_address" {}
 variable "gateway" {
   default = "192.168.1.1"
 }
-```
+   ```
 
 ---
 
@@ -105,7 +106,7 @@ target_node    = "pve"
 template_name  = "debian-docker-template"
 instance_name  = "blog1"
 ip_address     = "192.168.1.50"
-```
+   ```
 > ✅*Note:* You copy this to `terraform.tfvars` locally and **never commit** the real one. 
 
 ---
@@ -188,21 +189,21 @@ Copy to `inventory.ini` locally and update IPs.
       command: docker-compose up -d
       args:
         chdir: /home/debian/wordpress
-```
+   ```
 
 ---
 
 `templates/env.j2`
    ```jinja2
-MYSQL_DATABASE={{ mysql_database }}
-MYSQL_USER={{ mysql_user }}
-MYSQL_PASSWORD={{ lookup('file', mysql_password_file) }}
-MYSQL_ROOT_PASSWORD={{ lookup('file', mysql_root_password_file) }}
-WORDPRESS_DB_HOST=db:3306
-WORDPRESS_DB_USER={{ mysql_user }}
-WORDPRESS_DB_PASSWORD={{ lookup('file', mysql_password_file) }}
-WORDPRESS_DB_NAME={{ mysql_database }}
-```
+   MYSQL_DATABASE={{ mysql_database }}
+   MYSQL_USER={{ mysql_user }}
+   MYSQL_PASSWORD={{ lookup('file', mysql_password_file) }}
+   MYSQL_ROOT_PASSWORD={{ lookup('file', mysql_root_password_file) }}
+   WORDPRESS_DB_HOST=db:3306
+   WORDPRESS_DB_USER={{ mysql_user }}
+   WORDPRESS_DB_PASSWORD={{ lookup('file', mysql_password_file) }}
+   WORDPRESS_DB_NAME={{ mysql_database }}
+   ```
 
 ---
 
@@ -210,27 +211,27 @@ WORDPRESS_DB_NAME={{ mysql_database }}
 
 1. Clone your repo locally:
    ```bash
-git clone git@github.com:yourusername/homelab-wordpress.git
-```
+   git clone git@github.com:yourusername/homelab-wordpress.git
+   ```
 
 2. Set local variables:
    ```bash
-cp terraform/terraform.tfvars.example terraform/terraform.tfvars
-cp ansible/inventory.ini.example ansible/inventory.ini
-```
-Edit both files with your eral values.
+   cp terraform/terraform.tfvars.example terraform/terraform.tfvars
+   cp ansible/inventory.ini.example ansible/inventory.ini
+   ```
+Edit both files with your real values.
 3. Deploy VM:
    ```bash
-cd terraform
-terraform init
-terraform apply
-```
+   cd terraform
+   terraform init
+   terraform apply
+   ```
 
 4. Configure VM:
    ```bash
-cd ../ansible
-ansible-playbook -i inventory.ini playbook.yml
-```
+   cd ../ansible
+   ansible-playbook -i inventory.ini playbook.yml
+   ```
 
 ---
 
