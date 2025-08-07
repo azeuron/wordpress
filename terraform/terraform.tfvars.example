@@ -1,0 +1,5 @@
+pm_password    = "changeme"
+target_node    = "pve"
+template_name  = "debian-docker-template"
+instance_name  = "blog1"
+ip_address     = "192.168.1.50"
