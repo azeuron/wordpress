@@ -1,3 +1,52 @@
+#Self-hosted WordPress project
+
+#1️⃣ Directory Structure
+
+   ```css
+   homelab-wordpress/
+   ├── README.md
+   ├── .gitignore
+   ├── terraform/
+   │   ├── provider.tf
+   │   ├── main.tf
+   │   ├── variables.tf
+   │   ├── terraform.tfvars.example
+   ├── ansible/
+   │   ├── inventory.ini.example
+   │   ├── playbook.yml
+   │   ├── group_vars/
+   │   │   └── wordpress.yml
+   │   ├── vault_pass.txt (OPTIONAL, never commit)
+   ```
+
+---
+
+#2️⃣.gitignore
+Ensures you never commit private info:
+   ```bash
+   # Terraform sensitive files
+   terraform.tfstate
+   terraform.tfstate.backup
+   *.tfvars
+   *.tfstate.lock.info
+
+   # Ansible sensitive files
+   ansible/inventory.ini
+   ansible/vault_pass.txt
+
+   # Temporary files
+   *.retry
+   *.log
+   __pycache__/
+   ```
+✅**This ensures passwords, SSH keys, and state files with IP addresses never reach GitHub.
+
+---
+
+#3️⃣ README.md
+Provides instructions for future you or collaborators.
+
+   ```markdown
 # Homelab WordPress Deployment (Terraform + Ansible)
 
 This repo deploys a WordPress VM in Proxmox using Terraform and configures it with Ansible.
@@ -233,6 +282,8 @@ Edit both files with your real values.
    ansible-playbook -i inventory.ini playbook.yml
    ```
 
+5. Access blog: http://<VM-IP>:8080
+
 ---
 
 # ✅ **Key Security Measures**
@@ -242,3 +293,4 @@ Edit both files with your real values.
 - Passwords are generated on first run and stored only on the VM and your local machine, not in code.
 - SSH keys are referenced by path, not copied to the repo.
 
+   ```
