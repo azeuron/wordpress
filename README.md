@@ -268,6 +268,7 @@ Copy to `inventory.ini` locally and update IPs.
    cp ansible/inventory.ini.example ansible/inventory.ini
    ```
 Edit both files with your real values.
+
 3. Deploy VM:
    ```bash
    cd terraform
